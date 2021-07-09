@@ -51,6 +51,29 @@ const cartModalClose = () => {
     enableScroll();
 };
 
+
+// request to database
+
+const getData = async () => {
+    const data = await fetch('db.json');
+
+    if (data.ok) {
+        return data.json()
+    } else {
+        throw new Error(`Данне небыли полученыб ошибка ${data.status} ${data.statusText}`)
+    }
+};
+
+const getGoods = (callback) => {
+    getData()
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
+
 subheaderCart.addEventListener('click', cartModalOpen);
 
 cartOverlay.addEventListener('click', event => {
